@@ -11,7 +11,7 @@ import {
 
 const solutions = [
   {
-    name: 'Instituições Internacionais',
+    name: 'Encontrar Instituições',
     description: 'Get a better understanding of where your traffic is coming from.',
     href: '#',
     icon: GlobeIcon,
@@ -24,7 +24,7 @@ function classNames(...classes) {
 
 function Header() {
   return(
-    <Popover className="relative bg-emerald-300 shadow-lg">
+    <Popover className="relative bg-pink-700 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between items-center py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
@@ -32,7 +32,7 @@ function Header() {
               <span className="sr-only">Workflow</span>
               <img
                 className="h-8 w-auto sm:h-10"
-                src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                src="https://tailwindui.com/img/logos/workflow-mark-white.svg"
                 alt=""
               />
             </a>
@@ -49,15 +49,15 @@ function Header() {
                 <>
                   <Popover.Button
                     className={classNames(
-                      open ? 'text-emerald-50' : 'text-white',
-                      'group rounded-md inline-flex items-center text-white font-medium hover:text-emerald-50 focus:outline-none text-lg'
+                      open ? 'text-pink-900' : 'text-white',
+                      'group rounded-md inline-flex items-center font-medium hover:text-pink-900 focus:outline-none text-lg'
                     )}
                   >
                     <span>Doar</span>
                     <ChevronDownIcon
                       className={classNames(
-                        open ? 'text-emerald-50' : 'text-white',
-                        'h-4 w-5 group-hover:text-emerald-100'
+                        open ? 'text-pink-900' : 'text-white',
+                        'h-4 w-5 group-hover:text-pink-900'
                       )}
                       aria-hidden="true"
                     />
@@ -79,11 +79,11 @@ function Header() {
                             <a
                               key={item.name}
                               href={item.href}
-                              className="-m-3 p-3 flex items-start rounded-lg hover:bg-emerald-50"
+                              className="-m-3 p-3 flex items-start rounded-lg hover:bg-pink-50"
                             >
-                              <item.icon className="flex-shrink-0 h-6 w-6 text-emerald-300" aria-hidden="true" />
+                              <item.icon className="flex-shrink-0 h-6 w-6 text-pink-700" aria-hidden="true" />
                               <div className="ml-4">
-                                <p className="text-emerald-300 font-medium">{item.name}</p>
+                                <p className="text-pink-700 font-medium">{item.name}</p>
                                 <p className="mt-1 text-sm text-gray-500">{item.description}</p>
                               </div>
                             </a>
