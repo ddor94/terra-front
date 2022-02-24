@@ -1,10 +1,11 @@
 import React from 'react';
-import './assets/scss/tailwind.css';
+import Header from './components/Header';
+import './assets/css/tailwind.css';
 
 function App() {
   return (
     <div className="App">
-      
+      <Header />
     </div>
   );
 }
