@@ -1,17 +1,22 @@
 import React from 'react';
+import PasswordStrengthMeter from './PasswordStrengthMeter';
 import { required, invalidEmail } from '../../utils/variables/forms';
 import { classnames } from '../../utils/helpers/classnames';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
+import zxcvbn from 'zxcvbn';
 
 function AuthForm({ isRegister, onSubmit }) {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const passwordStrength = zxcvbn(watch("password") ? watch("password") : '');
+
+  const disableBtn = isRegister ? watch("username") && watch("email") && watch("password") && passwordStrength.score >= 2 ? false : true : watch("email") && watch("password") ? false : true;
 
   return(
     <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
       <div className="rounded-md ">
         {
-          isRegister && 
+          isRegister &&
           <div className="mb-3">
             <label htmlFor="username" className="sr-only">
               Nome de usuário
@@ -19,11 +24,11 @@ function AuthForm({ isRegister, onSubmit }) {
             <input
               id="username"
               name="username"
-              type="username"
+              type="text"
               autoComplete="username"
               required
               className={classnames(
-                errors.username ? "border-red-600" : 'border-gray-300',
+                errors.username ? "border-red-500" : 'border-gray-300',
                 "appearance-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-pink-700 focus:border-pink-700 focus:z-10 sm:text-sm"
               )}
               placeholder="Nome de usuário"
@@ -55,7 +60,7 @@ function AuthForm({ isRegister, onSubmit }) {
             autoComplete="email"
             required
             className={classnames(
-              errors.email ? "border-red-600" : 'border-gray-300',
+              errors.email ? "border-red-500" : 'border-gray-300',
               "appearance-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-pink-700 focus:border-pink-700 focus:z-10 sm:text-sm"
             )}
             placeholder="E-mail"
@@ -89,9 +94,9 @@ function AuthForm({ isRegister, onSubmit }) {
             name="password"
             type="password"
             autoComplete="current-password"
-
+            required
             className={classnames(
-              errors.password ? "border-red-600" : 'border-gray-300',
+              errors.password ? "border-red-500" : 'border-gray-300',
               "appearance-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-pink-700 focus:border-pink-700 focus:z-10 sm:text-sm"
             )}
             placeholder="Senha"
@@ -123,10 +128,19 @@ function AuthForm({ isRegister, onSubmit }) {
         </div>
       }
 
+      {
+        isRegister &&
+        <PasswordStrengthMeter passwordStrength={passwordStrength} />
+      }
+
       <div>
         <button
+          disabled={disableBtn}
           type="submit"
-          className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-pink-700 hover:bg-pink-900 focus:outline-none"
+          className={classnames(
+            disableBtn ? "hover:none" : "hover:bg-pink-900",
+            "group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-pink-700 focus:outline-none disabled:opacity-75"
+          )}
         >
           Continuar
         </button>
