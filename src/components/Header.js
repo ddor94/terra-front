@@ -1,13 +1,14 @@
 import React, { Fragment } from 'react';
-import { Popover, Transition } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/solid'
+import { Popover, Transition } from '@headlessui/react';
+import { ChevronDownIcon } from '@heroicons/react/solid';
+import { classnames } from '../utils/helpers/classnames';
 import {
   LogoutIcon,
   CogIcon,
   GlobeIcon,
   MenuIcon,
   XIcon
-} from '@heroicons/react/outline'
+} from '@heroicons/react/outline';
 
 const solutions = [
   {
@@ -16,11 +17,7 @@ const solutions = [
     href: '#',
     icon: GlobeIcon,
   }
-]
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
+];
 
 function Header() {
   return(
@@ -48,14 +45,14 @@ function Header() {
               {({ open }) => (
                 <>
                   <Popover.Button
-                    className={classNames(
+                    className={classnames(
                       open ? 'text-pink-900' : 'text-white',
                       'group rounded-md inline-flex items-center font-medium hover:text-pink-900 focus:outline-none text-lg'
                     )}
                   >
                     <span>Doar</span>
                     <ChevronDownIcon
-                      className={classNames(
+                      className={classnames(
                         open ? 'text-pink-900' : 'text-white',
                         'h-4 w-5 group-hover:text-pink-900'
                       )}

@@ -1,10 +1,27 @@
 import React from 'react';
+import AuthForm from './AuthForm';
 import { Link } from 'react-router-dom';
-import { useForm } from "react-hook-form";
+import { registerUser } from '../../apiCalls/auth';
+import { useMutation } from '@apollo/client';
 
 function Register() {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
+  const [handleRegistration, {
+    data,
+    loading,
+    error
+  }] = useMutation(registerUser);
+
+  const onSubmit = (data) => {
+    handleRegistration({
+      variables: {
+        username: data.username,
+        email: data.email,
+        password: data.password,
+      }
+    })
+    .then((res) => console.log(res))
+    .catch((error) => console.log(error))
+  };
 
   return(
     <>
@@ -22,65 +39,8 @@ function Register() {
           </Link>
         </p>
       </div>
-      <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
-        <input type="hidden" name="remember" defaultValue="true" />
-        <div className="rounded-md shadow-sm -space-y-px">
-          <div>
-            <label htmlFor="username" className="sr-only">
-              Nome de Usuário
-            </label>
-            <input
-              id="username"
-              name="username"
-              type="text"
-              autoComplete="username"
-              required
-              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-pink-700 focus:border-pink-700 focus:z-10 sm:text-sm"
-              placeholder="Nome de Usuário"
-              {...register("username", {required: true})}
-            />
-          </div>
-          <div>
-            <label htmlFor="email-address" className="sr-only">
-              E-mail
-            </label>
-            <input
-              id="email-address"
-              name="email"
-              type="email"
-              autoComplete="email"
-              required
-              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-pink-700 focus:border-pink-700 focus:z-10 sm:text-sm"
-              placeholder="E-mail"
-              {...register("email", {required: true})}
-            />
-          </div>
-          <div>
-            <label htmlFor="password" className="sr-only">
-              Senha
-            </label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              autoComplete="current-password"
-              required
-              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-pink-700 focus:border-pink-700 focus:z-10 sm:text-sm"
-              placeholder="Senha"
-              {...register("password", {required: true})}
-            />
-          </div>
-        </div>
 
-        <div>
-          <button
-            type="submit"
-            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-pink-700 hover:bg-pink-900 focus:outline-none"
-          >
-            Continuar
-          </button>
-        </div>
-      </form>
+      <AuthForm isRegister={true} onSubmit={onSubmit} />
     </>
   )
 }

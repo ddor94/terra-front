@@ -1,8 +1,8 @@
 import React from 'react';
 import Main from './components/Main';
-import AuthLayout from './components/Layouts/AuthLayout';
-import Login from './components/Auth/Login';
-import Register from './components/Auth/Register';
+import AuthLayout from './components/layouts/AuthLayout';
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
 import './assets/css/tailwind.css';
 import {
   BrowserRouter,
