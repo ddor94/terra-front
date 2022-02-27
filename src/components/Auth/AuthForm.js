@@ -1,12 +1,14 @@
 import React from 'react';
+import Loader from '../commons/Loader';
 import PasswordStrengthMeter from './PasswordStrengthMeter';
+import { ChevronDownIcon } from '@heroicons/react/solid';
 import { required, invalidEmail } from '../../utils/variables/forms';
 import { classnames } from '../../utils/helpers/classnames';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
 import zxcvbn from 'zxcvbn';
 
-function AuthForm({ isRegister, onSubmit }) {
+function AuthForm({ isRegister, onSubmit, loading }) {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const passwordStrength = zxcvbn(watch("password") ? watch("password") : '');
 
@@ -142,7 +144,7 @@ function AuthForm({ isRegister, onSubmit }) {
             "group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-pink-700 focus:outline-none disabled:opacity-75"
           )}
         >
-          Continuar
+          { loading ? <Loader height={"1.5em"} /> : 'Continuar' }
         </button>
       </div>
     </form>

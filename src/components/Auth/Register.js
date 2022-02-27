@@ -14,7 +14,7 @@ function Register() {
   const onSubmit = (data) => {
     handleRegistration({
       variables: {
-        username: data.username,
+        userName: data.username,
         email: data.email,
         password: data.password,
       }
@@ -40,7 +40,11 @@ function Register() {
         </p>
       </div>
 
-      <AuthForm isRegister={true} onSubmit={onSubmit} />
+      <AuthForm
+        isRegister={true}
+        onSubmit={onSubmit}
+        loading={loading}
+      />
     </>
   )
 }
