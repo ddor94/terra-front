@@ -28,7 +28,7 @@ function AuthForm({ isRegister, onSubmit }) {
               autoComplete="username"
               required
               className={classnames(
-                errors.username ? "border-red-500" : 'border-gray-300',
+                errors.username ? "border-red-600" : 'border-gray-300',
                 "appearance-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-pink-700 focus:border-pink-700 focus:z-10 sm:text-sm"
               )}
               placeholder="Nome de usuário"

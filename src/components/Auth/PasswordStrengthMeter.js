@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { classnames } from '../../utils/helpers/classnames';
 
 function PasswordStrengthMeter({ passwordStrength }) {
   const label = () => {
@@ -35,30 +36,23 @@ function PasswordStrengthMeter({ passwordStrength }) {
     }
   };
 
-  const color = () => {
-    switch (passwordStrength.score) {
-      case 0:
-        return "red";
-      case 1:
-        return "red";
-      case 2:
-        return "yellow";
-      case 3:
-        return "sky";
-      case 4:
-        return "emerald";
-      default:
-        return "red";
-    }
-  };
-
   return (
     <div className="mx-2">
       <div className="bg-gray-200 rounded-full h-3 dark:bg-gray-700">
-        <div className={`transition-all duration-400 h-3 rounded-full ${percentage()} bg-${color()}-500`}></div>
+        <div className={`transition-all duration-400 h-3 rounded-full ${percentage()} bg-pink-700`}></div>
       </div>
       <small className="block mt-2 font-medium text-gray-500">
-        Força da senha: <span className={`text-${color()}-500`}>{label()}</span>
+        Força da senha: <span className={classnames(
+          passwordStrength.score == 0 || passwordStrength.score == 1 ?
+          'text-red-600' :
+          passwordStrength.score == 2 ?
+          'text-amber-600' :
+          passwordStrength.score == 3 ?
+          'text-sky-600' :
+          passwordStrength.score == 4 ?
+          'text-emerald-600' :
+          'text-gray-900'
+        )}>{label()}</span>
       </small>
     </div>
   );
