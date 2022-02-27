@@ -3,6 +3,7 @@ import AuthForm from './AuthForm';
 import { Link } from 'react-router-dom';
 import { registerUser } from '../../apiCalls/auth';
 import { useMutation } from '@apollo/client';
+import { setToken } from '../../utils/helpers/auth';
 
 function Register() {
   const [handleRegistration, {
@@ -19,8 +20,12 @@ function Register() {
         password: data.password,
       }
     })
-    .then((res) => console.log(res))
+    .then((res) => handleSuccess(res.data.registerUser))
     .catch((error) => console.log(error))
+  };
+
+  const handleSuccess = (payload) => {
+    setToken(payload.user.authenticationToken);
   };
 
   return(

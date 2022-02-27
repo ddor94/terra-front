@@ -4,6 +4,7 @@ import AuthLayout from './components/layouts/AuthLayout';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import './assets/css/tailwind.css';
+import { PrivateRoute } from './utils/helpers/privateRoute';
 import {
   BrowserRouter,
   Routes,
@@ -15,9 +16,14 @@ function App() {
     <div className="App h-full">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Main />}>
-            <Route index element={<Main />} />
-          </Route>
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <Main />
+              </PrivateRoute>
+            }
+          />
           <Route element={<AuthLayout />}>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

@@ -1,7 +1,6 @@
 import React from 'react';
 import Loader from '../commons/Loader';
 import PasswordStrengthMeter from './PasswordStrengthMeter';
-import { ChevronDownIcon } from '@heroicons/react/solid';
 import { required, invalidEmail } from '../../utils/variables/forms';
 import { classnames } from '../../utils/helpers/classnames';
 import { useForm } from "react-hook-form";
@@ -73,7 +72,7 @@ function AuthForm({ isRegister, onSubmit, loading }) {
               },
               pattern: {
                 value:
-                  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                 message: invalidEmail,
               },
             })}
