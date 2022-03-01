@@ -14,7 +14,7 @@ function AuthForm({ isRegister, onSubmit, loading }) {
   const disableBtn = isRegister ? watch("username") && watch("email") && watch("password") && passwordStrength.score >= 2 ? false : true : watch("email") && watch("password") ? false : true;
 
   return(
-    <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
+    <form className="mt-8 space-y-6 max-w-xs m-auto" onSubmit={handleSubmit(onSubmit)}>
       <div className="rounded-md ">
         {
           isRegister &&
@@ -30,7 +30,7 @@ function AuthForm({ isRegister, onSubmit, loading }) {
               required
               className={classnames(
                 errors.username ? "border-red-600" : 'border-gray-300',
-                "appearance-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-pink-700 focus:border-pink-700 focus:z-10 sm:text-sm"
+                "appearance-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-pink-100 focus:border-pink-100 focus:z-10 sm:text-sm"
               )}
               placeholder="Nome de usuário"
               {...register("username", {
@@ -62,7 +62,7 @@ function AuthForm({ isRegister, onSubmit, loading }) {
             required
             className={classnames(
               errors.email ? "border-red-500" : 'border-gray-300',
-              "appearance-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-pink-700 focus:border-pink-700 focus:z-10 sm:text-sm"
+              "appearance-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-pink-100 focus:border-pink-100 focus:z-10 sm:text-sm"
             )}
             placeholder="E-mail"
             {...register("email", {
@@ -98,7 +98,7 @@ function AuthForm({ isRegister, onSubmit, loading }) {
             required
             className={classnames(
               errors.password ? "border-red-500" : 'border-gray-300',
-              "appearance-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-pink-700 focus:border-pink-700 focus:z-10 sm:text-sm"
+              "appearance-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-pink-100 focus:border-pink-100 focus:z-10 sm:text-sm"
             )}
             placeholder="Senha"
             {...register("password", {
@@ -139,8 +139,8 @@ function AuthForm({ isRegister, onSubmit, loading }) {
           disabled={disableBtn}
           type="submit"
           className={classnames(
-            disableBtn ? "hover:none" : "hover:bg-pink-900",
-            "group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-pink-700 focus:outline-none disabled:opacity-75"
+            disableBtn ? "hover:none cursor-not-allowed bg-transparent" : "hover:bg-pink-100",
+            "group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-pink-700 bg-pink-50 focus:outline-none disabled:opacity-75"
           )}
         >
           { loading ? <Loader height={"1.5em"} /> : 'Continuar' }

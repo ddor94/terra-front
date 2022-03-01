@@ -38,7 +38,7 @@ function PasswordStrengthMeter({ passwordStrength }) {
 
   return (
     <div className="mx-2">
-      <div className="bg-gray-200 rounded-full h-3 dark:bg-gray-700">
+      <div className="bg-pink-100 rounded-full h-3 dark:bg-gray-700">
         <div className={`transition-all duration-400 h-3 rounded-full ${percentage()} bg-pink-700`}></div>
       </div>
       <small className="block mt-2 font-medium text-gray-500">

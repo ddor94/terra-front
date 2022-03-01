@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import RegisterSuccessModal from './RegisterSuccessModal';
 import AuthForm from './AuthForm';
 import { Link } from 'react-router-dom';
 import { registerUser } from '../../apiCalls/auth';
@@ -6,6 +7,8 @@ import { useMutation } from '@apollo/client';
 import { setToken } from '../../utils/helpers/auth';
 
 function Register() {
+  let [modal, setModal] = useState(false);
+
   const [handleRegistration, {
     data,
     loading,
@@ -21,6 +24,7 @@ function Register() {
       }
     })
     .then((res) => handleSuccess(res.data.registerUser))
+    .then(() => setModal(true))
     .catch((error) => console.log(error))
   };
 
@@ -49,6 +53,11 @@ function Register() {
         isRegister={true}
         onSubmit={onSubmit}
         loading={loading}
+      />
+
+      <RegisterSuccessModal
+        modal={modal}
+        setModal={setModal}
       />
     </>
   )
