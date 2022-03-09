@@ -139,11 +139,18 @@ function AuthForm({ isRegister, onSubmit, loading }) {
           disabled={disableBtn}
           type="submit"
           className={classnames(
-            disableBtn ? "hover:none cursor-not-allowed bg-transparent" : "hover:bg-pink-100",
-            "group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-pink-700 bg-pink-50 focus:outline-none disabled:opacity-75"
+            disableBtn ? "hover:none cursor-not-allowed" : "hover:bg-pink-100",
+            "group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-pink-700 bg-pink-50 focus:outline-none disabled:opacity-50"
           )}
         >
-          { loading ? <Loader height={"1.5em"} /> : 'Continuar' }
+          {
+            loading ?
+            <Loader
+              height={"1.5em"}
+              isPrimary={true}
+            /> :
+            'Continuar'
+          }
         </button>
       </div>
     </form>

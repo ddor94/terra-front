@@ -13,4 +13,4 @@ export const removeToken = () => {
   localStorage.removeItem(tokenKey);
 };
 
-export const currentUser = makeVar([]);
+export const storedUser = makeVar([]);

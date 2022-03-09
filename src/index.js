@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { currentUser, token } from './utils/helpers/auth';
+import { storedUser, token } from './utils/helpers/auth';
 import { setContext } from '@apollo/client/link/context';
 import {
   ApolloClient,
@@ -31,9 +31,9 @@ const client = new ApolloClient({
     typePolicies: {
       Query: {
         fields: {
-          currentUser: {
+          storedUser: {
             read() {
-              return currentUser();
+              return storedUser();
             }
           }
         }

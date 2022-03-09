@@ -36,7 +36,7 @@ function Login() {
         alt="Workflow"
       />
       <h2 className="mt-6 text-center text-3xl text-pink-700 font-medium">Olá, digite seu e-mail e senha parar entrar em sua conta</h2>
-      <p className="mt-2 text-center text-sm text-gray-600">
+      <p className="mt-2 text-center text-sm text-gray-500">
         ou{' '}
         <Link to="/register" className="font-medium text-pink-700 hover:text-pink-900">
           crie uma nova conta

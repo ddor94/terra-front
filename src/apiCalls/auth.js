@@ -49,9 +49,6 @@ export const logoutUser = gql`
     logoutUser(input: {}) {
       user {
         id
-        userName
-        email
-        authenticationToken
       }
       success
       errors
@@ -59,9 +56,9 @@ export const logoutUser = gql`
   }
 `;
 
-export const getCurrentUser = gql`
-  query {
-    currentUser {
+export const currentUser = gql`
+  query currentUser {
+    currentUser(input: {}) {
       user {
         id
         userName

@@ -1,7 +1,12 @@
 import React, { Fragment } from 'react';
-import { Popover, Transition } from '@headlessui/react';
+import Loader from './commons/Loader';
+import { Popover, Transition, Menu } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import { classnames } from '../utils/helpers/classnames';
+import { capitalize } from '../utils/helpers/typography';
+import { logoutUser } from '../apiCalls/auth';
+import { removeToken } from '../utils/helpers/auth';
+import { useMutation } from '@apollo/client';
 import {
   LogoutIcon,
   CogIcon,
@@ -16,10 +21,35 @@ const solutions = [
     description: 'Get a better understanding of where your traffic is coming from.',
     href: '#',
     icon: GlobeIcon,
+  },
+  {
+    name: 'Encontrar Instituições',
+    description: 'Get a better understanding of where your traffic is coming from.',
+    href: '#',
+    icon: GlobeIcon,
+  },
+  {
+    name: 'Encontrar Instituições',
+    description: 'Get a better understanding of where your traffic is coming from.',
+    href: '#',
+    icon: GlobeIcon,
   }
 ];
 
-function Header() {
+function Header({ loadingUser, user }) {
+  const [handleLogout, {
+    data,
+    loading,
+    error
+  }] = useMutation(logoutUser);
+
+  const logout = () => {
+    handleLogout()
+    .then((res) => removeToken())
+    .then(() => window.location.reload())
+    .catch((error) => console.log(error))
+  };
+
   return(
     <Popover className="relative bg-pink-700 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -45,10 +75,7 @@ function Header() {
               {({ open }) => (
                 <>
                   <Popover.Button
-                    className={classnames(
-                      open ? 'text-pink-900' : 'text-white',
-                      'group rounded-md inline-flex items-center font-medium hover:text-pink-900 focus:outline-none text-lg'
-                    )}
+                    className="group rounded-md inline-flex items-center font-medium focus:outline-none text-lg text-white"
                   >
                     <span>Doar</span>
                     <ChevronDownIcon
@@ -80,7 +107,7 @@ function Header() {
                             >
                               <item.icon className="flex-shrink-0 h-6 w-6 text-pink-700" aria-hidden="true" />
                               <div className="ml-4">
-                                <p className="text-pink-700 font-medium">{item.name}</p>
+                                <p className="text-pink-700">{item.name}</p>
                                 <p className="mt-1 text-sm text-gray-500">{item.description}</p>
                               </div>
                             </a>
@@ -94,7 +121,58 @@ function Header() {
             </Popover>
           </Popover.Group>
           <div className="text-white hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-            Olá
+            {
+              loadingUser ?
+              <Loader height={"1em"} isPrimary={false} /> :
+              <Menu as="div" className="relative">
+                <Menu.Button className="inline-block h-8 w-8 rounded-full ring-2 ring-white items-center flex justify-center bg-pink-700 cursor-pointer focus:outline-none">
+                  {capitalize(user.userName[0])}
+                </Menu.Button>
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-300"
+                  enterFrom="transform opacity-0 scale-95"
+                  enterTo="transform opacity-100 scale-100"
+                  leave="transition ease-in duration-200"
+                  leaveFrom="transform opacity-100 scale-100"
+                  leaveTo="transform opacity-0 scale-95"
+                >
+                  <Menu.Items className="absolute right-0 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Item>
+                    {({ active }) => (
+                      <div className="flex text-pink-700 rounded-t-md items-center justify-start text-medium px-2 py-3 bg-pink-50">
+                        <p>
+                          Olá, {user.userName}
+                        </p>
+                      </div>
+                    )}
+                    </Menu.Item>
+
+                    <Menu.Item>
+                    {({ active }) => (
+                      <div className="flex text-gray-500 items-center justify-start text-xs cursor-pointer px-2 py-3 hover:text-gray-900">
+                        <CogIcon className="h-5 w-5 mr-2" aria-hidden="true" />
+                        <p>
+                          Configurações da conta
+                        </p>
+                      </div>
+                    )}
+                    </Menu.Item>
+
+                    <Menu.Item>
+                    {({ active }) => (
+                      <div className="flex text-pink-700 items-center justify-start text-xs px-2 py-3 cursor-pointer hover:text-pink-900 rounded-b-md" onClick={() => logout()}>
+                        <LogoutIcon className="h-5 w-5 mr-2" aria-hidden="true" />
+                        <p>
+                          Sair
+                        </p>
+                      </div>
+                    )}
+                    </Menu.Item>
+                  </Menu.Items>
+                </Transition>
+              </Menu>
+            }
           </div>
         </div>
       </div>
