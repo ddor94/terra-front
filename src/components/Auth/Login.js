@@ -1,9 +1,32 @@
 import React from 'react';
 import AuthForm from './AuthForm';
 import { Link } from 'react-router-dom';
+import { loginUser } from '../../apiCalls/auth';
+import { useMutation } from '@apollo/client';
+import { setToken } from '../../utils/helpers/auth';
 
 function Login() {
-  const onSubmit = data => console.log(data);
+  const [handleLogin, {
+    data,
+    loading,
+    error
+  }] = useMutation(loginUser);
+
+  const onSubmit = (data) => {
+    handleLogin({
+      variables: {
+        email: data.email,
+        password: data.password,
+      }
+    })
+    .then((res) => handleSuccess(res.data.loginUser))
+    .then(() => window.location.reload())
+    .catch((error) => console.log(error))
+  };
+
+  const handleSuccess = (payload) => {
+    setToken(payload.user.authenticationToken);
+  };
 
   return(
     <div>
@@ -20,7 +43,11 @@ function Login() {
         </Link>
       </p>
 
-      <AuthForm isRegister={false} onSubmit={onSubmit} />
+      <AuthForm
+        isRegister={false}
+        onSubmit={onSubmit}
+        loading={loading}
+      />
     </div>
   )
 }

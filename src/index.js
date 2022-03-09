@@ -2,15 +2,44 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { currentUser, token } from './utils/helpers/auth';
+import { setContext } from '@apollo/client/link/context';
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
+  createHttpLink
 } from "@apollo/client";
 
-const client = new ApolloClient({
+const httpLink = createHttpLink({
   uri: 'http://localhost:5100/graphql',
-  cache: new InMemoryCache()
+});
+
+const authLink = setContext((_, { headers }) => {
+  return {
+    headers: {
+      ...headers,
+      authorization: `Bearer ${token}`,
+      credentials: 'same-origin'
+    }
+  }
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          currentUser: {
+            read() {
+              return currentUser();
+            }
+          }
+        }
+      }
+    }
+  })
 });
 
 ReactDOM.render(

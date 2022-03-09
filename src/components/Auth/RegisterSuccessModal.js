@@ -1,16 +1,13 @@
 import React, { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { useNavigate } from 'react-router-dom';
 
 function RegisterSuccessModal({ modal, setModal }) {
-  let navigate = useNavigate();
-
   return(
     <Transition appear show={modal} as={Fragment}>
       <Dialog
         as="div"
         className="fixed inset-0 z-10 overflow-y-auto"
-        onClose={() => navigate("/")}
+        onClose={() => window.location.reload()}
       >
         <div className="min-h-screen px-4 text-center">
           <Transition.Child
@@ -58,7 +55,7 @@ function RegisterSuccessModal({ modal, setModal }) {
                 <button
                   type="button"
                   className="inline-flex justify-center px-4 py-2 text-sm font-medium text-pink-700 bg-pink-50 border border-transparent rounded-md hover:bg-pink-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-                  onClick={() => navigate("/")}
+                  onClick={() => window.location.reload()}
                 >
                   Entendi
                 </button>

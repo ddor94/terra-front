@@ -1,3 +1,4 @@
+import { makeVar } from "@apollo/client";
 import { getItemFromStore, setItemToStore } from './localStorage';
 
 export const tokenKey = "utk";
@@ -11,3 +12,5 @@ export const setToken = (newToken) => {
 export const removeToken = () => {
   localStorage.removeItem(tokenKey);
 };
+
+export const currentUser = makeVar([]);

@@ -94,8 +94,7 @@ function Header() {
             </Popover>
           </Popover.Group>
           <div className="text-white hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-            <CogIcon className="flex-shrink-0 h-6 w-6" aria-hidden="true" />
-            <LogoutIcon className="flex-shrink-0 h-6 w-6 ml-4" aria-hidden="true" />
+            Olá
           </div>
         </div>
       </div>
