@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
 import zxcvbn from 'zxcvbn';
 
-function AuthForm({ isRegister, onSubmit, loading }) {
+function AuthForm({ isRegister, onSubmit, loading, dbErrors }) {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const passwordStrength = zxcvbn(watch("password") ? watch("password") : '');
 
@@ -30,7 +30,7 @@ function AuthForm({ isRegister, onSubmit, loading }) {
               required
               className={classnames(
                 errors.username ? "border-red-600" : 'border-gray-300',
-                "appearance-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-pink-100 focus:border-pink-100 focus:z-10 sm:text-sm"
+                "appearance-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-pink-100 focus:border-pink-700 focus:z-10 sm:text-sm"
               )}
               placeholder="Nome de usuário"
               {...register("username", {
@@ -62,7 +62,7 @@ function AuthForm({ isRegister, onSubmit, loading }) {
             required
             className={classnames(
               errors.email ? "border-red-500" : 'border-gray-300',
-              "appearance-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-pink-100 focus:border-pink-100 focus:z-10 sm:text-sm"
+              "appearance-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-pink-100 focus:border-pink-700 focus:z-10 sm:text-sm"
             )}
             placeholder="E-mail"
             {...register("email", {
@@ -98,7 +98,7 @@ function AuthForm({ isRegister, onSubmit, loading }) {
             required
             className={classnames(
               errors.password ? "border-red-500" : 'border-gray-300',
-              "appearance-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-pink-100 focus:border-pink-100 focus:z-10 sm:text-sm"
+              "appearance-none relative block w-full px-3 py-2 border placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-pink-100 focus:border-pink-700 focus:z-10 sm:text-sm"
             )}
             placeholder="Senha"
             {...register("password", {
@@ -117,6 +117,23 @@ function AuthForm({ isRegister, onSubmit, loading }) {
           }
         </div>
       </div>
+
+      {
+        dbErrors &&
+        <div className="text-red-600 border border-red-600 p-3 rounded-md">
+          <ul className="list-disc ml-4 p-0">
+            {
+              dbErrors.message.split(",").map((m, i) => {
+                return(
+                  <li key={i}>
+                    <small>{m}</small>
+                  </li>
+                )
+              })
+            }
+          </ul>
+        </div>
+      }
 
       {
         !isRegister &&

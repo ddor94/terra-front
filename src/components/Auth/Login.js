@@ -7,7 +7,6 @@ import { setToken } from '../../utils/helpers/auth';
 
 function Login() {
   const [handleLogin, {
-    data,
     loading,
     error
   }] = useMutation(loginUser);
@@ -47,6 +46,7 @@ function Login() {
         isRegister={false}
         onSubmit={onSubmit}
         loading={loading}
+        dbErrors={error}
       />
     </div>
   )

@@ -731,6 +731,10 @@ body {
   margin: auto;
 }
 
+.m-0 {
+  margin: 0px;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -801,6 +805,10 @@ body {
 
 .mt-4 {
   margin-top: 1rem;
+}
+
+.ml-6 {
+  margin-left: 1.5rem;
 }
 
 .block {
@@ -979,6 +987,10 @@ body {
   cursor: not-allowed;
 }
 
+.list-disc {
+  list-style-type: disc;
+}
+
 .appearance-none {
   -webkit-appearance: none;
           appearance: none;
@@ -1141,6 +1153,10 @@ body {
 
 .p-7 {
   padding: 1.75rem;
+}
+
+.p-0 {
+  padding: 0px;
 }
 
 .px-4 {
@@ -1457,6 +1473,11 @@ body {
 .focus\:border-pink-100:focus {
   --tw-border-opacity: 1;
   border-color: rgb(252 231 243 / var(--tw-border-opacity));
+}
+
+.focus\:border-pink-700:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(190 24 93 / var(--tw-border-opacity));
 }
 
 .focus\:outline-none:focus {

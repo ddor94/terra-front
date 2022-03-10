@@ -10,7 +10,6 @@ function Register() {
   let [modal, setModal] = useState(false);
 
   const [handleRegistration, {
-    data,
     loading,
     error
   }] = useMutation(registerUser);
@@ -53,6 +52,7 @@ function Register() {
         isRegister={true}
         onSubmit={onSubmit}
         loading={loading}
+        dbErrors={error}
       />
 
       <RegisterSuccessModal
