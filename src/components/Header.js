@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
 import Loader from './commons/Loader';
+import Settings from './account/Settings';
+import { Link } from 'react-router-dom';
 import { Popover, Transition, Menu } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import { classnames } from '../utils/helpers/classnames';
@@ -16,18 +18,6 @@ import {
 } from '@heroicons/react/outline';
 
 const solutions = [
-  {
-    name: 'Encontrar Instituições',
-    description: 'Get a better understanding of where your traffic is coming from.',
-    href: '#',
-    icon: GlobeIcon,
-  },
-  {
-    name: 'Encontrar Instituições',
-    description: 'Get a better understanding of where your traffic is coming from.',
-    href: '#',
-    icon: GlobeIcon,
-  },
   {
     name: 'Encontrar Instituições',
     description: 'Get a better understanding of where your traffic is coming from.',
@@ -150,12 +140,12 @@ function Header({ loadingUser, user }) {
 
                     <Menu.Item>
                     {({ active }) => (
-                      <div className="flex text-gray-500 items-center justify-start text-xs cursor-pointer px-2 py-3 hover:text-gray-900">
+                      <Link to="/settings" className="flex text-gray-500 items-center justify-start text-xs cursor-pointer px-2 py-3 hover:text-gray-900">
                         <CogIcon className="h-5 w-5 mr-2" aria-hidden="true" />
                         <p>
                           Configurações da conta
                         </p>
-                      </div>
+                      </Link>
                     )}
                     </Menu.Item>
 

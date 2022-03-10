@@ -4,6 +4,7 @@ import PanelLayout from './components/layouts/PanelLayout';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Dashboard from './components/Dashboard';
+import Settings from './components/account/Settings';
 import './assets/css/tailwind.css';
 import { PrivateRoute, AuthenticatedRoute } from './utils/helpers/privateRoute';
 import {
@@ -26,6 +27,7 @@ function App() {
             }
           >
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/settings" element={<Settings />} />
           </Route>
           <Route
             element={
