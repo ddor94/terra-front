@@ -17,9 +17,7 @@ function PanelLayout() {
         loadingUser={loading}
         user={data?.currentUser.user}
       />
-      <div className="container mx-auto">
-        <Outlet />
-      </div>
+      <Outlet />
     </>
   );
 }

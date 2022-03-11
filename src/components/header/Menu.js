@@ -15,8 +15,8 @@ function Menu() {
                 <>
                   <Popover.Button
                     className={classnames(
-                      open ? 'bg-pink-900' : 'bg-transparent',
-                      "group rounded-md inline-flex items-center font-medium focus:outline-none text-lg text-white hover:bg-pink-900 px-4 py-1"
+                      open ? 'bg-pink-50 text-pink-700' : 'bg-transparent text-white',
+                      "group rounded-md inline-flex items-center font-medium focus:outline-none text-lg hover:bg-pink-50 hover:text-pink-700 px-4 py-1"
 
                     )}
                   >

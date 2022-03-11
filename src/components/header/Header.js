@@ -12,7 +12,7 @@ function Header({ loadingUser, user }) {
         <div className="flex justify-between items-center py-4 md:justify-start md:space-x-10">
           {/* Mobile menu bars */}
           <div className="-mr-2 -my-2 md:hidden">
-            <Popover.Button className="bg-pink-900 text-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 focus:outline-none">
+            <Popover.Button className="bg-pink-900 text-white rounded-md p-2 inline-flex items-center justify-center focus:outline-none">
               <MenuIcon className="h-6 w-6" aria-hidden="true" />
             </Popover.Button>
           </div>
@@ -29,7 +29,7 @@ function Header({ loadingUser, user }) {
             </div>
           </div>
           {/* Icon END */}
-          
+
           <Menu />
 
           <UserSection
