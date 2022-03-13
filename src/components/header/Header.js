@@ -8,8 +8,8 @@ import { MenuIcon } from '@heroicons/react/outline';
 function Header({ loadingUser, user }) {
   return(
     <Popover className="relative bg-white border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex justify-between items-center py-4 md:justify-start md:space-x-10">
+      <div className="mx-auto px-4 sm:px-6">
+        <div className="flex justify-between items-center py-4 md:justify-start md:space-x-0">
           {/* Mobile menu bars */}
           <div className="-mr-2 -my-2 md:hidden">
             <Popover.Button className="bg-pink-900 text-white rounded-md p-2 inline-flex items-center justify-center focus:outline-none">
