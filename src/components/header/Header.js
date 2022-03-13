@@ -7,7 +7,7 @@ import { MenuIcon } from '@heroicons/react/outline';
 
 function Header({ loadingUser, user }) {
   return(
-    <Popover className="relative bg-pink-700 shadow-lg">
+    <Popover className="relative bg-white border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex justify-between items-center py-4 md:justify-start md:space-x-10">
           {/* Mobile menu bars */}
@@ -23,7 +23,7 @@ function Header({ loadingUser, user }) {
             <div>
               <img
                 className="h-8 w-auto sm:h-10"
-                src="https://tailwindui.com/img/logos/workflow-mark-white.svg"
+                src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
                 alt=""
               />
             </div>

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 function Menu() {
   return(
-    <Popover.Group as="nav" className="hidden md:flex space-x-10">
+    <Popover.Group as="nav" className="hidden md:flex space-x-5">
       {
         MENU_ITEMS.map((item) => {
           return(
@@ -15,8 +15,8 @@ function Menu() {
                 <>
                   <Popover.Button
                     className={classnames(
-                      open ? 'bg-pink-50 text-pink-700' : 'bg-transparent text-white',
-                      "group rounded-md inline-flex items-center font-medium focus:outline-none text-lg hover:bg-pink-50 hover:text-pink-700 px-4 py-1"
+                      open ? 'bg-pink-50' : 'bg-transparent',
+                      "group rounded-md inline-flex items-center focus:outline-none text-lg hover:bg-pink-50 text-pink-700 px-4 py-1"
 
                     )}
                   >
@@ -33,7 +33,7 @@ function Menu() {
                     leaveTo="opacity-0 translate-y-1"
                   >
                     <Popover.Panel className="absolute z-10 -ml-4 mt-3 transform px-2 w-screen max-w-md sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2">
-                      <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
+                      <div className="rounded-lg shadow-lg ring-1 ring-gray-200 overflow-hidden">
                         <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                           {
                             item.sub_items.map((sub_item) => {

@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 
 function AuthLayout() {
   useEffect(() => {
-    document.body.className = 'bg-pink-700';
+    document.body.className = 'bg-pink-50';
     return () => { document.body.className = ''; }
   });
 

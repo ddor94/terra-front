@@ -24,7 +24,7 @@ export const MENU_ITEMS = [
 
   {
     key: 2,
-    title: 'Minhas doações',
+    title: 'Minhas Doações',
     sub_items: [
       {
         key: 1,
