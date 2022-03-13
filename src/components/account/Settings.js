@@ -55,7 +55,7 @@ function Settings() {
         </Tab.List>
 
         <Tab.Panels className="h-full w-full p-5">
-          <Tab.Panel>
+          <Tab.Panel className="outline-none">
             <AccountInfo />
           </Tab.Panel>
           <Tab.Panel>Content 2</Tab.Panel>
