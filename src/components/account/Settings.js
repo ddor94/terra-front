@@ -7,8 +7,16 @@ import {
   CurrencyDollarIcon,
   LockClosedIcon
 } from '@heroicons/react/outline';
+import { currentUser } from '../../apiCalls/auth';
+import { useQuery } from '@apollo/client';
 
 function Settings() {
+  const { loading, error, data } = useQuery(currentUser);
+
+  if (error) {
+    console.log(error);
+  }
+
   return(
     <div className="md:flex flex-col md:flex-row md:min-h-screen w-full">
       <Tab.Group>
@@ -56,7 +64,10 @@ function Settings() {
 
         <Tab.Panels className="h-full w-full p-5">
           <Tab.Panel className="outline-none">
-            <AccountInfo />
+            <AccountInfo
+              loadingUser={loading}
+              user={data?.currentUser.user}
+            />
           </Tab.Panel>
           <Tab.Panel>Content 2</Tab.Panel>
         </Tab.Panels>

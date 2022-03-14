@@ -4,8 +4,16 @@ import MobileMenu from './MobileMenu';
 import UserSection from './UserSection';
 import { Popover } from '@headlessui/react';
 import { MenuIcon } from '@heroicons/react/outline';
+import { currentUser } from '../../apiCalls/auth';
+import { useQuery } from '@apollo/client';
 
-function Header({ loadingUser, user }) {
+function Header() {
+  const { loading, error, data } = useQuery(currentUser);
+
+  if (error) {
+    console.log(error);
+  }
+
   return(
     <Popover className="relative bg-white border-b border-gray-200">
       <div className="mx-auto px-4 sm:px-6">
@@ -33,8 +41,8 @@ function Header({ loadingUser, user }) {
           <Menu />
 
           <UserSection
-            loadingUser={loadingUser}
-            user={user}
+            loadingUser={loading}
+            user={data?.currentUser.user}
           />
         </div>
       </div>

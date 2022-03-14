@@ -32,7 +32,7 @@ function UserSection({ loadingUser, user }) {
     <div className="text-white md:flex items-center justify-end md:flex-1 lg:w-0">
       {
         loadingUser ?
-        <Loader height={"1em"} isPrimary={false} /> :
+        <Loader height={"1em"} isPrimary={true} /> :
         <Menu as="div" className="relative">
           <Menu.Button className="inline-block h-8 w-8 rounded-full ring-2 ring-pink-700 items-center flex justify-center bg-pink-50 cursor-pointer focus:outline-none text-pink-700">
             {capitalize(user.userName[0])}
