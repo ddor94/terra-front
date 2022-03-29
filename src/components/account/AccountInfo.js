@@ -4,9 +4,18 @@ import { useForm } from "react-hook-form";
 import { required, invalidEmail } from '../../utils/variables/forms';
 import { classnames } from '../../utils/helpers/classnames';
 import Loader from '../commons/Loader';
+import { STATES } from '../../utils/variables/states';
+import { useQuery } from '@apollo/client';
+import { listCities } from '../../apiCalls/cities';
 
 function AccountInfo({ loadingUser, user }) {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const { loading, error, data } = useQuery(listCities, {
+    variables: { uf: watch("state") }
+  });
+
+  const isCityDisabled = watch("state") == "-- Selecione --" ? true : false;
+  const cities = data ? data.listCities.cities : [];
 
   return(
     <div>
@@ -84,24 +93,62 @@ function AccountInfo({ loadingUser, user }) {
 
               <div className="col-span-6 sm:col-span-3">
                 <label className="block text-sm text-gray-500">Estado</label>
-                <select id="state" name="state" autoComplete="state-name" className="mt-1 block w-full py-2 px-3 border border-gray-200 bg-white rounded-md shadow-sm focus:outline-none focus:ring-pink-700 focus:border-pink-700 sm:text-sm text-gray-500">
-                  <option>United States</option>
-                  <option>Canada</option>
-                  <option>Mexico</option>
+                <select
+                  id="state"
+                  name="state"
+                  autoComplete="state-name"
+                  className="mt-1 block w-full py-2 px-3 border border-gray-200 bg-white rounded-md shadow-sm focus:outline-none focus:ring-pink-700 focus:border-pink-700 sm:text-sm text-gray-500"
+                  {...register("state")}
+                >
+                  <option>-- Selecione --</option>
+                  {
+                    STATES.map((state) => {
+                      return(
+                        <option
+                          value={state.uf}
+                          key={state.uf}
+                        >
+                          {state.name}
+                        </option>
+                      )
+                    })
+                  }
                 </select>
               </div>
 
               <div className="col-span-6 sm:col-span-3">
-                <label className="block text-sm text-gray-500">Cidade</label>
-                <select id="city" name="city" autoComplete="city-name" className="mt-1 block w-full py-2 px-3 border border-gray-200 bg-white rounded-md shadow-sm focus:outline-none focus:ring-pink-700 focus:border-pink-700 sm:text-sm text-gray-500">
-                  <option>United States</option>
-                  <option>Canada</option>
-                  <option>Mexico</option>
+                <label className="block text-sm text-gray-500 flex items-center">
+                  Cidade
+                  { loading && <Loader height={".8em"} isPrimary={true} /> }
+                </label>
+                <select
+                  id="city"
+                  name="city"
+                  autoComplete="city-name"
+                  className={classnames(
+                    isCityDisabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
+                    'mt-1 block w-full py-2 px-3 border border-gray-200 bg-white rounded-md shadow-sm focus:outline-none focus:ring-pink-700 focus:border-pink-700 sm:text-sm text-gray-500'
+                  )}
+                  disabled={isCityDisabled}
+                >
+                  <option>-- Selecione --</option>
+                  {
+                    cities.map((city) => {
+                      return(
+                        <option
+                          value={city.id}
+                          key={city.id}
+                        >
+                          {city.name}
+                        </option>
+                      )
+                    })
+                  }
                 </select>
               </div>
 
               <div className="col-span-6 sm:col-span-3">
-                <label className="block text-sm text-gray-500">Endereço Completo</label>
+                <label className="block text-sm text-gray-500">Endereço completo</label>
                 <input type="text" name="street-address" id="street-address" autoComplete="street-address" className="mt-1 focus:ring-pink-700 focus:border-pink-700 block w-full shadow-sm sm:text-sm border-gray-200 rounded-md text-gray-500" />
               </div>
             </div>
